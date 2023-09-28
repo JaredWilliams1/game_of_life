@@ -33,21 +33,32 @@ Now lets look at the more efficient implementation. For this implementation, you
 Lets say a cell is stored like this:  
 `0 0 0 1 0 0 1`
 
-It's technically storing the number 8 but it's actually storing 2 pieces of information:
+It's technically storing the number 9 but it's actually storing 2 pieces of information:
 
 `0 0 0 1 0 0    |    1`  
 `4 neighbors      cell is on`
 
-This allows for a "push" approach where dead cells that come to life increment the neighboring cells neighbor count, and living cells that die decrement the neighboring cells neighbor count. You do this by increasing/decreasing the cell byte by 2.
+The term for the rightmost binary digit is the Least Significant Bit (LSB) and it stores the living/dead status.
 
-Why 2?
+Notice how the living cells have odd numbered bytes and all dead cells have even numbered bytes.
 
-Lets look at the example cell from earlier:  
-`0 0 0 1 0 0 1`
+If I wanted to add a neighbor to a cell you'd add 2 to the byte:
 
-This is the binary representation of 9. The key is that all odd numbers have a LSB of 1 and all even numbers have an LSB of 0, so by adding 2 to the byte, you add one to the neighbor count and leave the on/off value (LSB) unchanged.
+`0 0 0 1 0 1    |    1`  
+`5 neighbors      cell is on`
 
-All of that is for this crucial speed-up, we can now safely skip cells that have values of 0. Since we're storing both the on/off value and the neighbor count in the same number, we know that cells with a value of 0 are dead and have no living neighbors.
+Likewise to remove a neighbor you'd subtrack 2 from the byte.
+
+If we want to change the living/dead status of the cell we just add/subtract 1 (modifying the LSB)
+
+This allows for a "push" approach where:  
+
+dead cells that come to life ----> increment the neighboring cells neighbor count (by adding 2 to the byte)  
+and    
+living cells that die ----> decrement the neighboring cells neighbor count (by subtracting 2 from the byte)  
+
+All of that is for this crucial speed-up:  
+We can now safely skip cells that have values of 0. Since we're storing both the on/off value and the neighbor count in the same number, we know that cells with a value of 0 are dead and have no living neighbors (and therefore remaining dead in the next step).
 
 For each update step, all non-zero cells are analyzed, we calculate if they're living or dead in the next step (using the info already in the byte), and then we update the neighbor count of the surrounding cells if the cell dies or is brought to life.
 
