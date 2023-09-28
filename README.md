@@ -47,7 +47,7 @@ If I wanted to add a neighbor to a cell you'd add 2 to the byte:
 `0 0 0 1 0 1    |    1`  
 `5 neighbors      cell is on`
 
-Likewise to remove a neighbor you'd subtrack 2 from the byte.
+Likewise to remove a neighbor you'd subtract 2 from the byte.
 
 If we want to change the living/dead status of the cell we just add/subtract 1 (modifying the LSB)
 
