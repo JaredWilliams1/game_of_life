@@ -58,7 +58,7 @@ dead cells that come to life ----> increment the neighboring cells neighbor coun
 living cells that die ----> decrement the neighboring cells neighbor count (by subtracting 2 from the byte)  
 
 All of that is for this crucial speed-up:  
-We can now safely skip cells that have values of 0. Since we're storing both the on/off value and the neighbor count in the same number, we know that cells with a value of 0 are dead and have no living neighbors (and therefore remaining dead in the next step).
+We can now safely skip cells that have byte values of 0. Since we're storing both the on/off value and the neighbor count in the same number, we know that cells with a value of 0 are dead and have no living neighbors (and therefore remaining dead in the next step).
 
 For each update step, all non-zero cells are analyzed, we calculate if they're living or dead in the next step (using the info already in the byte), and then we update the neighbor count of the surrounding cells if the cell dies or is brought to life.
 
