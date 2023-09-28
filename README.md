@@ -40,7 +40,7 @@ It's technically storing the number 9 but it's actually storing 2 pieces of info
 
 The term for the rightmost binary digit is the Least Significant Bit (LSB) and it stores the living/dead status.
 
-Notice how the living cells have odd numbered bytes and all dead cells have even numbered bytes.
+Notice how the living cells have odd numbered bytes and the dead cells have even numbered bytes.
 
 If I wanted to add a neighbor to a cell you'd add 2 to the byte:
 
