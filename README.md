@@ -16,23 +16,24 @@ The game has 2 rules:
 
 From these two rules, a wide variety of unpredictable and self sustaining patterns can emerge. For more information, here's the [wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) page:
 
+So for every cell update, you'd count its "neighbors" to see if it'll be alive or dead in the next step:  
+`0 0 0 0 0 0`  
+`0 X X X 0 0`  
+`0 X Y X 0 0`  
+`0 X X X 0 0`  
+`0 0 0 0 0 0`  
+The X's are the neighbors of Y
+
 For all implementations the first step is to duplicate the grid, one for the previous cell values, and one for the new cell values
 
-Lets look at the brute force approach. Looping over the whole grid, you check every cell in a box around cell, I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell
-
-(in order to update Y you have to "pull" in and total all X values)
-`0 0 1 1 0 0` 
-`0 X X X 1 1` 
-`1 X Y X 0 0` 
-`0 X X X 0 1` 
-`0 1 0 1 1 0` 
+Lets look at the brute force approach. Looping over the whole grid, you check every cell in a box around cell, I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell.
 
 Now lets look at the more efficient implementation. For this implementation, you store cells not as a bit value but as a byte value. The least significant bit (LSB) represents whether the cell is alive or dead, and the rest of the byte represents the alive neighbor count. This way we can store both pieces of information in a single number.
 
-Lets say a cell is stored like this:
+Lets say a cell is stored like this:  
 `0 0 0 1 0 0 1`
 
-`0 0 0 1 0 0    |    1`
+`0 0 0 1 0 0    |    1`  
 `4 neighbors      cell is on`
 
 This allows for a "push" approach where alive cells increment the neighboring cells neighbor count. You do this by increasing the cell byte by 2.
