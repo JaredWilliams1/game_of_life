@@ -10,13 +10,8 @@ Conway's Game of Life isn't really a game it's a simulation. It starts with a gr
 
 This is the initial state. The values are called cells and they can either be alive or dead (1 or 0).
 
-The game has 2 rules:
-1. If the cell is alive, then it stays alive if it has either 2 or 3 live neighbors.
-2. If the cell is dead, then it springs to life only in the case that it has 3 live neighbors.
+A cell's neighbors are all those directly next to it in 8 directions (a box)
 
-From these two rules, a wide variety of unpredictable and self sustaining patterns can emerge. For more information, here's the [wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) page:
-
-So for every cell update, you'd count its "neighbors" to see if it'll be alive or dead in the next step:  
 `0 0 0 0 0 0`  
 `0 X X X 0 0`  
 `0 X Y X 0 0`  
@@ -24,9 +19,15 @@ So for every cell update, you'd count its "neighbors" to see if it'll be alive o
 `0 0 0 0 0 0`  
 The X's are the neighbors of Y
 
-For all implementations the first step is to duplicate the grid, one for the previous cell values, and one for the new cell values
+The game has 2 rules:
+1. If the cell is alive, then it stays alive if it has either 2 or 3 live neighbors.
+2. If the cell is dead, then it springs to life only in the case that it has 3 live neighbors.
 
-Lets look at the brute force approach. Looping over the whole grid, you check every cell in a box around cell, I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell.
+From these two rules, a wide variety of unpredictable and self sustaining patterns can emerge. For more information, here's the [wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) page:
+
+For all implementations the first step is to duplicate the grid, one for the previous cell values, and one for the new cell values.
+
+The brute force approach is simple. For each individual cell, you check its neighbors and count the living ones to see if the cell will be living or dead in the next iteration. I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell.
 
 Now lets look at the more efficient implementation. For this implementation, you store cells not as a bit value but as a byte value. The Least Significant Bit (LSB) represents whether the cell is alive or dead, and the rest of the byte represents the alive neighbor count. This way we can store both pieces of information in a single number.
 
