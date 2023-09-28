@@ -28,7 +28,7 @@ For all implementations the first step is to duplicate the grid, one for the pre
 
 Lets look at the brute force approach. Looping over the whole grid, you check every cell in a box around cell, I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell.
 
-Now lets look at the more efficient implementation. For this implementation, you store cells not as a bit value but as a byte value. The least significant bit (LSB) represents whether the cell is alive or dead, and the rest of the byte represents the alive neighbor count. This way we can store both pieces of information in a single number.
+Now lets look at the more efficient implementation. For this implementation, you store cells not as a bit value but as a byte value. The Least Significant Bit (LSB) represents whether the cell is alive or dead, and the rest of the byte represents the alive neighbor count. This way we can store both pieces of information in a single number.
 
 Lets say a cell is stored like this:  
 `0 0 0 1 0 0 1`
