@@ -113,7 +113,8 @@ void cellmap::set_cell(unsigned int x, unsigned int y)
    else
       yobelow = w;
 
-   *(cell_ptr) |= 0x01;
+   *(cell_ptr) |= 0x01;  // turns the target cell on (LSB=1)
+   // This is binary, so adding 2 (binary 10) leaves the LSB unchanged
    *(cell_ptr + yoabove + xoleft) += 2;
    *(cell_ptr + yoabove) += 2;
    *(cell_ptr + yoabove + xoright) += 2;
