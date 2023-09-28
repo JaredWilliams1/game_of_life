@@ -55,8 +55,6 @@ This allows for a "push" approach where:
 
 dead cells that come to life ----> increment the neighboring cells neighbor count (by adding 2 to the byte)  
 
-and    
-
 living cells that die ----> decrement the neighboring cells neighbor count (by subtracting 2 from the byte)  
 
 All of that is for this crucial speed-up:  
