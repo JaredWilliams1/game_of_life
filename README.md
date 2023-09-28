@@ -33,6 +33,8 @@ Now lets look at the more efficient implementation. For this implementation, you
 Lets say a cell is stored like this:  
 `0 0 0 1 0 0 1`
 
+It's technically storing the number 8 but it's actually storing 2 pieces of information:
+
 `0 0 0 1 0 0    |    1`  
 `4 neighbors      cell is on`
 
