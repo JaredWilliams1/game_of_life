@@ -36,7 +36,9 @@ Lets say a cell is stored like this:
 `0 0 0 1 0 0    |    1`  
 `4 neighbors      cell is on`
 
-This allows for a "push" approach where alive cells increment the neighboring cells neighbor count. You do this by increasing the cell byte by 2.
+This allows for a "push" approach where dead cells that come to life increment the neighboring cells neighbor count, and living cells that die decrement the neighboring cells neighbor count. You do this by increasing/decreasing the cell byte by 2.
+
+Why 2?
 
 Lets look at the example cell from earlier:  
 `0 0 0 1 0 0 1`
