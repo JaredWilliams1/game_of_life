@@ -2,11 +2,11 @@ This is an implementation of Conway's Game of Life that is more efficient than t
 
 Conway's Game of Life isn't really a game it's a simulation. It starts with a grid with values that are either on or off
 
-0 0 1 1 0 0 
-0 0 1 0 1 1 
-1 0 0 0 0 0 
-0 0 0 0 0 1 
-0 1 0 1 1 0 
+0 0 1 1 0 0  
+0 0 1 0 1 1  
+1 0 0 0 0 0  
+0 0 0 0 0 1  
+0 1 0 1 1 0  
 
 This is the initial state. The values are called cells and they can either be alive or dead (1 or 0).
 
