@@ -2,11 +2,11 @@ This is an implementation of Conway's Game of Life that is more efficient than t
 
 Conway's Game of Life isn't really a game it's a simulation. It starts with a grid with values that are either on or off
 
-0 0 1 1 0 0  
-0 0 1 0 1 1  
-1 0 0 0 0 0  
-0 0 0 0 0 1  
-0 1 0 1 1 0  
+`0 0 1 1 0 0`  
+`0 0 1 0 1 1`  
+`1 0 0 0 0 0`  
+`0 0 0 0 0 1`  
+`0 1 0 1 1 0`  
 
 This is the initial state. The values are called cells and they can either be alive or dead (1 or 0).
 
@@ -21,24 +21,24 @@ For all implementations the first step is to duplicate the grid, one for the pre
 Lets look at the brute force approach. Looping over the whole grid, you check every cell in a box around cell, I think of this as the "pull" approach because you have to pull in the cells neighbor values to find the new value of the cell
 
 (in order to update Y you have to "pull" in and total all X values)
-0 0 1 1 0 0 
-0 X X X 1 1 
-1 X Y X 0 0 
-0 X X X 0 1 
-0 1 0 1 1 0 
+`0 0 1 1 0 0` 
+`0 X X X 1 1` 
+`1 X Y X 0 0` 
+`0 X X X 0 1` 
+`0 1 0 1 1 0` 
 
 Now lets look at the more efficient implementation. For this implementation, you store cells not as a bit value but as a byte value. The least significant bit (LSB) represents whether the cell is alive or dead, and the rest of the byte represents the alive neighbor count. This way we can store both pieces of information in a single number.
 
 Lets say a cell is stored like this:
-0 0 0 1 0 0 1
+`0 0 0 1 0 0 1`
 
-0 0 0 1 0 0    |    1
-4 neighbors      cell is on
+`0 0 0 1 0 0    |    1`
+`4 neighbors      cell is on`
 
 This allows for a "push" approach where alive cells increment the neighboring cells neighbor count. You do this by increasing the cell byte by 2.
 
-Lets look at the example cell from earlier:
-0 0 0 1 0 0 1
+Lets look at the example cell from earlier:  
+`0 0 0 1 0 0 1`
 
 This is the binary representation of 9. The key is that all odd numbers have a LSB of 1 and all even numbers have an LSB of 0, so by adding 2 to the byte, you add one to the neighbor count and leave the on/off value (LSB) unchanged.
 
