@@ -20,8 +20,8 @@ public:
    void init(void);
 };
 
-unsigned int cellmap_width = 96;
-unsigned int cellmap_height = 96;
+unsigned int cellmap_width = 6;
+unsigned int cellmap_height = 6;
 
 /* Width & height in pixels of each cell. */
 unsigned int magnifier = 2;
@@ -29,7 +29,7 @@ unsigned int magnifier = 2;
 /* Randomizing seed */
 unsigned int seed;
 
-void main()
+int main()
 {
     cellmap current_map(cellmap_height, cellmap_width);
 
@@ -40,7 +40,8 @@ void main()
         // Print matrix
         for (int i = 0; i < cellmap_height; i++) {
             for (int j = 0; j < cellmap_width; j++) {
-                std::cout << current_map.cells[i*cellmap_width+j] << " ";
+                // std::cout << current_map.cells[i*cellmap_width+j] << " ";
+                std::cout << current_map.cell_state(j, i) << " ";
             }
             std::cout << "\n";
         }
@@ -60,7 +61,7 @@ void main()
         }
 
     }
-
+   return 0;
 }
 
 /* cellmap constructor. */
@@ -212,6 +213,7 @@ void cellmap::next_generation()
          cell_ptr++; // advance to the next cell byte
       } while (++x < w);
 RowDone:
+;
    }
 }
 
